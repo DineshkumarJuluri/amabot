@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Amazon BOT</title>
+</head>
+
+<body>
+    <img src={{imglink}} alt="">
+    <h1>Title : {{title}}</h1>
+    <h1>Offerprice : {{offerprice}}</h1>
+    <h1>Price : <strike>{{price}}</strike></h1>
+    <h1>url : <a href={{url}} target="_blank">{{url}}</a></h1>
+    <button id="copy-button">Copy to Clipboard</button>
+
+    <script>
+        document.getElementById('copy-button').addEventListener('click', function () {
+            // Wait for all images to finish loading before copying the content
+            const images = document.getElementsByTagName('img');
+            const imagesLoaded = [...images].map(img => img.complete);
+            if (imagesLoaded.every(loaded => loaded === true)) {
+                // Create a range to select the contents of the document body
+                const range = document.createRange();
+                range.selectNode(document.body);
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(range);
+
+                // Copy the selected content to the clipboard
+                document.execCommand('copy');
+                window.getSelection().removeAllRanges();
+            }
+        });
+    </script>
+</body>
+
+</html>
